@@ -23,4 +23,13 @@ public class CalculatorTest {
         assertEquals("Power of a and b where a is positive and b is negetive", 0.25, calculator.pow(2,-2), DELTA);
         assertEquals("Log of negative number", -1, calculator.log(-9), DELTA);
     }
+    @Test
+    public void testfact(){
+        assertEquals("Fatorial of a where a is positive", 120, calculator.fact(5), DELTA);
+        assertEquals("Fatorial of a where a is positive", 1, calculator.fact(0), DELTA);
+        assertEquals("Fatorial of a where a is positive", -1, calculator.fact(-23), DELTA);
+        assertEquals("Fatorial of a where a is positive", 1, calculator.fact(1), DELTA);
+        assertEquals("Fatorial of a where a is positive", 39916800, calculator.fact(11), DELTA);
+       
+    }
 }
