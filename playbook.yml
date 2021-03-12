@@ -1,0 +1,8 @@
+---
+- name: Pull docker image
+  hosts: virtual
+  tasks:
+    - name: Pull image of working project from dockerhub
+      docker_image:
+        name: niteshjan/mini_project
+        source: pull
