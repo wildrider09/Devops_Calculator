@@ -15,8 +15,7 @@ public class Calculator {
     static boolean check=true;
     static Scanner sc=new Scanner(System.in);
 
-    public static void main (String args[]) throws IOException{
-
+    public static void main (String args[]){
         while(check){
                 System.out.println("---Press a key according to given options---\n 1:Square Root \t 2:Factorial \t 3:Natural Logarithm \t 4:Power Funtion \t 5:Exit");
                 System.out.print("Enter your choice:::");
@@ -36,12 +35,11 @@ public class Calculator {
                             logger.error("Invalid input, entered input is not a number!!!");
                             return;
                         }
-
-                        c = sqrt(a);
-                        if (c < 0)
+                        if (a < 0)
                             System.out.println("Square root of negative number can not be calculated!!!");
+
                         else
-                            System.out.println("The resultant output is: " + c);
+                            System.out.println("The resultant output is: " +sqrt(a));
                         break;
                     case 2:
                         int f;
@@ -52,11 +50,10 @@ public class Calculator {
                             logger.error("Invalid input, entered input is not a number!!!");
                             return;
                         }
-                        double fac = fact(f);
-                        if (fac < 0)
+                        if (f < 0)
                             System.out.println("Factorial of negative number can not be calculated!!!");
                         else
-                            System.out.println("The resultant output is: " + fac);
+                            System.out.println("The resultant output is: " +fact(f));
                         break;
                     case 3:
                         try {
@@ -66,11 +63,10 @@ public class Calculator {
                             logger.error("Invalid input, entered input is not a number!!!");
                             return;
                         }
-                        c = log(a);
-                        if (c < 0)
+                        if (a < 0)
                             System.out.println("Input number can not be less than or equal to zero for finding log!!!");
                         else
-                            System.out.println("The resultant output is: " + c);
+                            System.out.println("The resultant output is: " +log(a));
                         break;
                     case 4:
                         try {
@@ -89,89 +85,64 @@ public class Calculator {
                         check = false;
                         break;
                     default:
-                        try {
                             System.out.println("XXXXX @@Wrong choice entered,please enter a valid number@@ XXXXXX");
-                        } catch (InputMismatchException error) {
-                            logger.error("Invalid input, entered input is not a number");
                             return;
                         }
                 }
-
         }
-      }
 
     public static double sqrt(double a){
-        double c=0;
-        try{
+            double c=0;
             logger.info("Calculating square root  of given number:" + a);
-            if(a < 0){
-                c = Double.NaN;
-                throw new ArithmeticException("In-case of NaN squareRoot of number < 0 !!!");
-            }
-            else{
+            if(a<0)
+                c=-1;
+            else
                 c = Math.sqrt(a);
-
-            }
-        }
-        catch(ArithmeticException err){
-            logger.error("Number cannot be negative:" + err.getMessage());
-        }
-        finally {
             logger.info("Resultant answer of power operations is : " + c);
-        }
-        return c;
+            return c;
     }
     public static Double fact(int f){
-        double result = 1;
-        try{
+            double result = 1;
             logger.info("Calculating factorial  of given number:" + f);
-            if(f < 0) {
-                result = Double.NaN;
-                throw new ArithmeticException("In-case of NaN factorial of number < 0 !!!");
-            }
-            if(f == 0 || f == 1) return 1.0;
+            if(f<0)
+                result=-1;
+            else {
+                try {
+                    if (f == 0 || f == 1) return 1.0;
 
-            for(int i = 1; i <= f; i++){
-                result *= i;
+                    for (int i = 1; i <= f; i++) {
+                        result *= i;
+                    }
+                }
+                catch (Exception e) {
+                    logger.info("Exception occured");
+                }
             }
-        }
-        catch(ArithmeticException err) {
-                logger.error("Number cannot be negative:" + err.getMessage());}
-
-        finally {
             logger.info("Resultant answer of power operations is : " + result);
-        }
-        return result;
+            return result;
     }
-
-
     public static double log(double a){
-        double c=0;
-        try{
+            double c=0;
             logger.info("Calculating natural log  of given number:" + a);
-            if(a <= 0){
-                c = Double.NaN;
-                throw new ArithmeticException("In-case of NaN logarithm of number < 0 !!!");
-            }
-            else{
-                c = Math.log(a);
-            }
-        }
-        catch(ArithmeticException err){
-            logger.error("Number cannot be negative:" + err.getMessage());}
-
-        finally {
+            if(a<=0)
+                c=-1;
+            else
+            c = Math.log(a);
             logger.info("Resultant answer of natural log operation is : " + c);
-        }
-        return c;
+            return c;
     }
     public static double pow ( double a, double b){
-            double c;
+            double c=0;
             logger.info("Calculating power function of given numbers:" + a+","+b);
-            if (a == 0 && b == 0) {
-                c = Double.NaN;
-            } else {
+            if (a == 0)
+                return 0;
+            if (b == 0)
+                return 1;
+            try {
                 c = Math.pow(a, b);
+            }
+            catch(Exception e) {
+                logger.info("Exception occured");
             }
             logger.info("Resultant answer of power operation is : " + c);
             return c;

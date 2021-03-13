@@ -27,7 +27,7 @@ public class CalculatorTest {
     public void testfact(){
         assertEquals("Fatorial of a where a is positive", 120, calculator.fact(5), DELTA);
         assertEquals("Fatorial of a where a is positive", 1, calculator.fact(0), DELTA);
-        assertEquals("Fatorial of a where a is positive", -1, calculator.fact(-23), DELTA);
+        assertEquals("Fatorial of a where a is negative", -1, calculator.fact(-23), DELTA);
         assertEquals("Fatorial of a where a is positive", 1, calculator.fact(1), DELTA);
         assertEquals("Fatorial of a where a is positive", 39916800, calculator.fact(11), DELTA);
        
