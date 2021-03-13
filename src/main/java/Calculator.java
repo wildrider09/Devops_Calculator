@@ -1,9 +1,15 @@
 
 import java.util.*;
 import java.io.*;
-import com.google.common.math.BigIntegerMath;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.text.DecimalFormat;
 
 public class Calculator {
+
+
+    private static final Logger logger = LogManager.getLogger(Calculator.class);
+
     static double a,b,c;
     static int choice;
     static boolean check=true;
@@ -12,57 +18,87 @@ public class Calculator {
     public static void main (String args[]) throws IOException{
 
         while(check){
-            try{
                 System.out.println("Press 1:Square Root,\t 2:Factorial,\t 3:Natural Logarithm,\t 4:Power Funtion,\t 5:Exit");
                 System.out.print("Enter your choice:");
-                choice=sc.nextInt();
-                switch (choice){
+                try {
+                    choice = scanner.nextInt();
+                }
+                catch (InputMismatchException error) {
+                    System.out.println("Invalid input entered.");
+                    return;
+                }
+                switch (choice) {
                     case 1:
-                        System.out.print("Enter a number for calculating square-root::");
-                        a= sc.nextDouble();
-                        c=sqrt(a);
-                        if(c<0)
+                        try {
+                            System.out.print("Enter a number for calculating square-root::");
+                            a = sc.nextDouble();
+                        } catch (InputMismatchException error) {
+                            logger.error("Invalid input, entered input is not a number");
+                            return;
+                        }
+
+                        c = sqrt(a);
+                        if (c < 0)
                             System.out.println("Square root of negative number can not be calculated");
                         else
-                            System.out.println("The resultant output is: "+c);
-                        break;
-                    case 3: System.out.print("Enter a number for calculating natural-logarithm::");
-                        double a= sc.nextDouble();
-                        c=log(a);
-                        if(c<0)
-                             System.out.println("Input number can not be less than or equal to zero for finding log");
-                        else
-                             System.out.println("The resultant output is: "+ c);
-                        break;
-                    case 4:
-                        System.out.print("Enter two numbers separated by space for calculating power(a^b: a b)::");
-                        a= sc.nextDouble();
-                        b= sc.nextDouble();
-                        c=pow(a,b);
-                        System.out.println("The resultant output is: "+ c);
+                            System.out.println("The resultant output is: " + c);
                         break;
                     case 2:
-                        System.out.print("Enter a number for calculating factorial::");
-                        int f=sc.nextInt();
-                        long fac= fact(f);
-                        if(fac<0)
+                        try {
+                            System.out.print("Enter a number for calculating factorial::");
+                            int f = sc.nextInt();
+                        } catch (InputMismatchException error) {
+                            logger.error("Invalid input, entered input is not a number");
+                            return;
+                        }
+                        long fac = fact(f);
+                        if (fac < 0)
                             System.out.println("Factorial of negative number can not be calculated");
                         else
-                            System.out.println("Answer is: "+ fac);
+                            System.out.println("Answer is: " + fac);
+                        break;
+                    case 3:
+                        try {
+                            System.out.print("Enter a number for calculating natural-logarithm::");
+                            double a = sc.nextDouble();
+                        } catch (InputMismatchException error) {
+                            logger.error("Invalid input, entered input is not a number");
+                            return;
+                        }
+                        c = log(a);
+                        if (c < 0)
+                            System.out.println("Input number can not be less than or equal to zero for finding log");
+                        else
+                            System.out.println("The resultant output is: " + c);
+                        break;
+                    case 4:
+                        try {
+                            System.out.print("Enter two numbers separated by space for calculating power(a^b: a b)::");
+                            a = sc.nextDouble();
+                            b = sc.nextDouble();
+                        } catch (InputMismatchException error) {
+                            logger.error("Invalid input, entered input is not a number");
+                            return;
+                        }
+                        c = pow(a, b);
+                        System.out.println("The resultant output is: " + c);
                         break;
                     case 5:
                         System.out.println("Thank you for using calculator;Have a nice day!!!!");
-                        check=false;
+                        check = false;
                         break;
                     default:
-                        System.out.println("X Wrong choice entered,please enter a valid number X");
+                        try {
+                            System.out.println("XXXXX @@Wrong choice entered,please enter a valid number@@ XXXXXX");
+                        } catch (InputMismatchException error) {
+                            logger.error("Invalid input, entered input is not a number");
+                            return;
+                        }
                 }
-            }
-            catch (Exception inp){
-                System.out.println("Error: "+inp );
-            }
+
         }
-    }
+      }
+
     public static double sqrt(double a){
         if(a<0){
             return -1;
