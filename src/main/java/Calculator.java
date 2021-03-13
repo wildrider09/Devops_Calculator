@@ -21,7 +21,7 @@ public class Calculator {
                 System.out.println("Press 1:Square Root,\t 2:Factorial,\t 3:Natural Logarithm,\t 4:Power Funtion,\t 5:Exit");
                 System.out.print("Enter your choice:");
                 try {
-                    choice = scanner.nextInt();
+                    choice = sc.nextInt();
                 }
                 catch (InputMismatchException error) {
                     System.out.println("Invalid input entered.");
@@ -44,9 +44,10 @@ public class Calculator {
                             System.out.println("The resultant output is: " + c);
                         break;
                     case 2:
+                        int f;
                         try {
                             System.out.print("Enter a number for calculating factorial::");
-                            int f = sc.nextInt();
+                            f = sc.nextInt();
                         } catch (InputMismatchException error) {
                             logger.error("Invalid input, entered input is not a number");
                             return;
