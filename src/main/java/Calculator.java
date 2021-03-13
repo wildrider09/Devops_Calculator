@@ -52,7 +52,7 @@ public class Calculator {
                             logger.error("Invalid input, entered input is not a number!!!");
                             return;
                         }
-                        long fac = fact(f);
+                        double fac = fact(f);
                         if (fac < 0)
                             System.out.println("Factorial of negative number can not be calculated!!!");
                         else
@@ -61,7 +61,7 @@ public class Calculator {
                     case 3:
                         try {
                             System.out.print("Enter a number for calculating natural-logarithm:::");
-                            double a = sc.nextDouble();
+                            a = sc.nextDouble();
                         } catch (InputMismatchException error) {
                             logger.error("Invalid input, entered input is not a number!!!");
                             return;
@@ -101,28 +101,80 @@ public class Calculator {
       }
 
     public static double sqrt(double a){
-        if(a<0){
-            return -1;
+        double c=0;
+        try{
+            logger.info("Calculating square root  of given number:" + a);
+            if(a < 0){
+                c = Double.NaN;
+                throw new ArithmeticException("In-case of NaN squareRoot of number < 0 !!!");
+            }
+            else{
+                c = Math.sqrt(a);
+
+            }
         }
-        c=Math.sqrt(a);
+        catch(ArithmeticException err){
+            logger.error("Number cannot be negative:" + err.getMessage());
+        }
+        finally {
+            logger.info("Resultant answer of power operations is : " + c);
+        }
         return c;
     }
-    public static long fact(int f){
-        if(f<0){
-            return -1;
+    public static Double fact(int f){
+        double result = 1;
+        try{
+            logger.info("Calculating factorial  of given number:" + f);
+            if(f < 0) {
+                result = Double.NaN;
+                throw new ArithmeticException("In-case of NaN factorial of number < 0 !!!");
+            }
+            if(f == 0 || f == 1) return 1.0;
+
+            for(int i = 1; i <= f; i++){
+                result *= i;
+            }
         }
-        if(f<2) return 1;
-        return f*fact(f-1);
+        catch(ArithmeticException err) {
+                logger.error("Number cannot be negative:" + err.getMessage());}
+
+        finally {
+            logger.info("Resultant answer of power operations is : " + result);
+        }
+        return result;
     }
+
+
     public static double log(double a){
-        if(a<=0){
-            return -1;
+        double c=0;
+        try{
+            logger.info("Calculating natural log  of given number:" + a);
+            if(a <= 0){
+                c = Double.NaN;
+                throw new ArithmeticException("In-case of NaN logarithm of number < 0 !!!");
+            }
+            else{
+                c = Math.log(a);
+            }
         }
-        c=Math.log(a);
+        catch(ArithmeticException err){
+            logger.error("Number cannot be negative:" + err.getMessage());}
+
+        finally {
+            logger.info("Resultant answer of natural log operation is : " + c);
+        }
         return c;
     }
-    public static double pow(double a, double b){
-        c=Math.pow(a,b);
-        return c;
+    public static double pow ( double a, double b){
+            double c;
+            logger.info("Calculating power function of given numbers:" + a+","+b);
+            if (a == 0 && b == 0) {
+                c = Double.NaN;
+            } else {
+                c = Math.pow(a, b);
+            }
+            logger.info("Resultant answer of power operation is : " + c);
+            return c;
+        }
     }
-}
+
