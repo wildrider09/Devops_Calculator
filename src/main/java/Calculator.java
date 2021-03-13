@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 public class Calculator {
 
 
-    private static final Logger logger = LogManager.getLogger(Calculator.class);
+    private static final Logger logger= LogManager.getLogger(Calculator.class);
 
     static double a,b,c;
     static int choice;
